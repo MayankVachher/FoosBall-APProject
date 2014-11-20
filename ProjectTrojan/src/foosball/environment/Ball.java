@@ -17,4 +17,8 @@ public class Ball {
 	public void step() {
 		position = direction.nextStep(position);
 	}
+	
+	public void updateDirection(Vector direction) {
+		this.direction = direction;
+	}
 }
