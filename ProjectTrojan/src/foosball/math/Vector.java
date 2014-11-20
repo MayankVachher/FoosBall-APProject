@@ -26,7 +26,6 @@ public class Vector {
 	
 	public void negateDeltaY() {
 		delta.y = -delta.y;
-		System.out.println("Negating deltaY");
 	}
 	
 	public void updateStartCoord(Coordinates a1) {

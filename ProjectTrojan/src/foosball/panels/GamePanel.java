@@ -40,7 +40,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		ball = new Ball(initialPosition, ballDirection);
 		
 		//timer
-		this.t = new Timer(1, this);
+		this.t = new Timer(5, this);
 		t.start();
 		addKeyListener((KeyListener) this);
 		setFocusable(true);
@@ -84,7 +84,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		   }
 	   }
 		// Draw ball
-		g.setColor(Color.yellow);
+		g.setColor(Color.darkGray);
 		//player_has_moved = false;
 		g.fillOval(this.ball.position.x, this.ball.position.y, GameConstants.ballDiameter, GameConstants.ballDiameter);
 	}
