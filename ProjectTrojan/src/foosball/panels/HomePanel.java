@@ -14,7 +14,7 @@ public class HomePanel extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private JButton playButton, HTPButton, aboutButton;
-	private JPanel headerPanel, buttonPanelContainer, buttonPanel, mainPanel;
+	private JPanel headerPanel, buttonPanelContainer, buttonPanel, mainPanel, gamePanel;
 	
 	public HomePanel() {
 		initUI();
@@ -26,13 +26,14 @@ public class HomePanel extends JPanel implements ActionListener {
 		playButton = new JButton("Play");
 		HTPButton = new JButton("How To Play");
 		aboutButton = new JButton("About");		
-		
-		
+
+
 		headerPanel = new JPanel(new GridLayout(1,1));
 		buttonPanel = new JPanel(new GridLayout(1,7));
  		buttonPanelContainer = new JPanel(new GridLayout(3,1));
  		mainPanel = new JPanel(new GridLayout(2,1));
-
+ 		gamePanel =  new GamePanel();
+ 
  		//headerPanel Work
  		ImageIcon image = new ImageIcon("img/header.jpg");
  		JLabel bgLabel = new JLabel("", image, JLabel.CENTER);
@@ -68,7 +69,9 @@ public class HomePanel extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == playButton) {
-			System.exit(0);
+				mainPanel.add(gamePanel, 1);
+				validate();
+				repaint();
 		}
 		else if(e.getSource() == HTPButton) {
 			System.exit(0);

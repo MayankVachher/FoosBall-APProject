@@ -20,6 +20,8 @@ public class Team {
 		n_def = n_defenders;
 		n_mid = n_midfielders;
 		
+		players = new Player[11];
+
 		for (; i < n_atk; i++) {
 			Coordinates initial = new Coordinates();
 			players[i] = new Atk(initial, this);
