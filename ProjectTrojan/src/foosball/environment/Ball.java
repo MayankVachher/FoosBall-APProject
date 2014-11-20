@@ -21,4 +21,8 @@ public class Ball {
 	public void updateDirection(Vector direction) {
 		this.direction = direction;
 	}
+	
+	public void updateLastHit(Team t) {
+		this.lastHitBy = t;
+	}
 }

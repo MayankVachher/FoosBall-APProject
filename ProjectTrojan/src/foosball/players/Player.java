@@ -31,5 +31,9 @@ public class Player implements Atking, Defing {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void updateCoordinate(int x, int y) {
+		this.position = new Coordinates(x,y);
+	}
 
 }

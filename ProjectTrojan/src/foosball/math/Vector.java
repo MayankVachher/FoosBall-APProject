@@ -1,44 +1,41 @@
 package foosball.math;
 
 public class Vector {
-	Coordinates a1;
-	Coordinates a2;
-	
-	Coordinates diff;
+	Coordinates init;
+	Coordinates fin;
+	Coordinates delta;
 	int steps;
 	
 	public Vector(Coordinates a1, Coordinates a2) {
-		diff = new Coordinates();
-		diff.x = a1.x - a2.x;
-		diff.y = a1.y - a2.y;
-	
-		this.steps = diff.x;
+		this.init = a1;
+		this.fin = a2;
+		delta = new Coordinates(fin.x - init.x, fin.y - init.y);
+		this.steps = delta.x;
 	}
 	
 	public Vector(Coordinates a1, Coordinates a2, int steps) {
-		diff = new Coordinates();
-		diff.x = a1.x - a2.x;
-		diff.y = a1.y - a2.y;
-
+		this.init = a1;
+		this.fin = a2;
+		delta = new Coordinates(fin.x - init.x, fin.y - init.y);
 		this.steps = steps;
 	}	
 	
 	public void updateStartCoord(Coordinates a1) {
-		this.a1 = a1;
-		diff.x = a1.x - a2.x;
-		diff.y = a1.y - a2.y;
+		this.init = a1;
+		delta.x = fin.x - init.x;
+		delta.y = fin.y - init.y;
 	}
 	
 	public void updateEndCoord(Coordinates a2) {
-		this.a2 = a2;
-		diff.x = a1.x - a2.x;
-		diff.y = a1.y - a2.y;
+		this.fin = a2;
+		delta.x = fin.x - init.x;
+		delta.y = fin.y - init.y;
 	}
 	
 	public Coordinates nextStep(Coordinates curr) {
-		Coordinates step = new Coordinates();
-		step.x = (int) (curr.x + (double)((diff.x) / (double)(steps)));
-		step.y = (int) (curr.y + (double)((diff.y) / (double)(steps)));
+		int temp_x = (int) (curr.x + (double)((delta.x) / (double)(steps)));
+		int temp_y = (int) (curr.y + (double)((delta.y) / (double)(steps)));
+		Coordinates step = new Coordinates(temp_x,temp_y);
 		return step;
 	}
 }

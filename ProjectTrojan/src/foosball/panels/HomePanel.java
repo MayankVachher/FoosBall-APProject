@@ -5,6 +5,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import foosball.math.GameConstants;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -14,7 +16,7 @@ public class HomePanel extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private JButton playButton, HTPButton, aboutButton;
-	private JPanel headerPanel, buttonPanelContainer, buttonPanel, mainPanel, gamePanel;
+	private JPanel headerPanel, buttonPanelContainer, buttonPanel, mainPanel, frame;
 	
 	public HomePanel() {
 		initUI();
@@ -32,7 +34,7 @@ public class HomePanel extends JPanel implements ActionListener {
 		buttonPanel = new JPanel(new GridLayout(1,7));
  		buttonPanelContainer = new JPanel(new GridLayout(3,1));
  		mainPanel = new JPanel(new GridLayout(2,1));
- 		gamePanel =  new GamePanel();
+ 		frame = new JPanel(new GridLayout(1,1));
  
  		//headerPanel Work
  		ImageIcon image = new ImageIcon("img/header.jpg");
@@ -57,7 +59,9 @@ public class HomePanel extends JPanel implements ActionListener {
  		//add header and buttonPanelContainer to mainPanel 	
  		mainPanel.add(headerPanel,BorderLayout.SOUTH);
  		mainPanel.add(buttonPanelContainer,BorderLayout.SOUTH);
- 		this.add(mainPanel);
+ 		frame.add(mainPanel,BorderLayout.CENTER);
+ 		this.setLayout(new GridLayout(1,1));
+ 		this.add(frame);
  		
  		
 		//ActionListeners
@@ -69,10 +73,10 @@ public class HomePanel extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == playButton) {
-				mainPanel.remove(0);
-				mainPanel.add(gamePanel, 0);
-				validate();
-				repaint();
+				frame.remove(mainPanel);
+				frame.add(new GamePanel());
+				frame.revalidate();
+				frame.repaint();
 		}
 		else if(e.getSource() == HTPButton) {
 			System.exit(0);

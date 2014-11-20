@@ -1,12 +1,7 @@
 package foosball.homeScreen;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-
 import javax.swing.*;
-
-import com.sun.org.apache.bcel.internal.Constants;
-
 import foosball.math.GameConstants;
 import foosball.panels.*;
 
@@ -18,7 +13,8 @@ public class HomeScreen extends JFrame {
 	}
 
 	private void initUI() {
-		this.add(new HomePanel(),BorderLayout.CENTER);
+		this.setLayout(new BorderLayout());
+		this.add(new HomePanel(), BorderLayout.CENTER);
 		setTitle("Foosball");
 		setSize(GameConstants.screenWidth, GameConstants.screenHeight);
 		setLocationRelativeTo(null);
@@ -29,7 +25,7 @@ public class HomeScreen extends JFrame {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		JFrame f = new HomeScreen();
+		new HomeScreen();
 	}
 
 }

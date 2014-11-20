@@ -10,9 +10,9 @@ public class ErrorMargin {
 	}
 	
 	public Coordinates getErrorCoord(Coordinates coord) {
-		Coordinates error = new Coordinates();
-		error.x = (int) (Math.random() * (error_plus + error_minus)) + coord.x - error_minus;
-		error.y = (int) (Math.random() * (error_plus + error_minus)) + coord.y - error_minus;
+		int temp_x = (int) (Math.random() * (error_plus + error_minus)) + coord.x - error_minus;
+		int temp_y = (int) (Math.random() * (error_plus + error_minus)) + coord.y - error_minus;
+		Coordinates error = new Coordinates(temp_x, temp_y);
 		return error;
 	}
 }

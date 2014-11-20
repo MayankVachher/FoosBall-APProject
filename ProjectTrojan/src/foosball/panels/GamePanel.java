@@ -25,63 +25,38 @@ import foosball.players.Player;
 import foosball.strategy.Team;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
-	Ball b;
-	Rods[] rods = new Rods[8];
+	Ball ball;
 	public Team[] teams = new Team[2];
 	Timer t;
 	int frameCount = 0;
 	private static final long serialVersionUID = 1L;
 	public GamePanel() {
-		Coordinates initialPosition = new Coordinates();
-		initialPosition.x = 30;
-		initialPosition.y = GameConstants.screenHeight / 2;
 		
-		Coordinates dummy = new Coordinates();
-		dummy.x = 31;
-		dummy.y = GameConstants.screenHeight / 2 + 1;
+		Coordinates initialPosition = new Coordinates(30, (GameConstants.screenHeight / 2));
+		Coordinates dummy = new Coordinates(31, (GameConstants.screenHeight / 2 + 1));
 		
+		//create Ball
 		Vector ballDirection = new Vector(initialPosition, dummy);
-		b = new Ball(initialPosition, ballDirection);
+		ball = new Ball(initialPosition, ballDirection);
+		
+		//timer
 		this.t = new Timer(5, this);
 		t.start();
 		addKeyListener((KeyListener) this);
 		setFocusable(true);
-		teams[0] = new Team(2, 5, 3);
-		teams[1] = new Team(2, 5, 3);
+		
+		//create teams
+		teams[0] = new Team(2, 5, 3, false);
+		teams[1] = new Team(2, 5, 3, true);
 
-		rods[0] = new Rods(100, teams[0], 0, 1);
-		rods[1] = new Rods(200, teams[0], 1, 2);
-		rods[2] = new Rods(300, teams[1], 8, 3);
-		rods[3] = new Rods(400, teams[0], 3, 5);
-		rods[4] = new Rods(500, teams[1], 3, 5);
-		rods[5] = new Rods(600, teams[0], 8, 3);
-		rods[6] = new Rods(700, teams[1], 1, 2);
-		rods[7] = new Rods(800, teams[1], 0, 1);
 		initUI();
-		initializePlayerPositions();
 	}
-	public void initializePlayerPositions() {
-		int dist;
-		for (int i = 0; i < 8; i++)
-		{
-			   dist = (500/(rods[i].number_of_players+1));
-			   int Ycoordinate=dist;
-			   for (int j=0;j<rods[i].number_of_players;j++)
-			   {
-				   rods[i].team.players[rods[i].start + j].position.x = rods[i].x - 5;
-				   rods[i].team.players[rods[i].start + j].position.y = Ycoordinate - 10;
-				   Ycoordinate=Ycoordinate+dist;
-			   }
-		  
-		}
-	}
+
 	public void nextFrame() {
-		this.b.step();
+		this.ball.step();
 		this.repaint();
 	}
-	public static void main(String[] args) {
-		GamePanel gp = new GamePanel();
-	}
+
 	public void paintComponent(Graphics g){
 		frameCount = 1;
 		super.paintComponent(g);
@@ -91,27 +66,27 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	    // g.setColor(Color.green);
 	    // g.fillRect(5, 5, 900, 500);
 	    
-	   int i,j,dist;
-	   for (i = 0; i < 8; i++)
+	   for (int k = 0; k < 2; k++)
 	   {
-		   dist = (500/(rods[i].number_of_players+1));
-		   int Ycoordinate=dist;
-		   for (j=0;j<rods[i].number_of_players;j++)
-		   {
-			   if (i == 0 || i == 1 || i == 3 || i == 5)
-				   g.setColor(Color.red);
-			   else	
-				   g.setColor(Color.black);
-			   
-			   g.drawRect((rods[i].x - 5), (rods[i].team.players[rods[i].start + j].position.y), GameConstants.player_width, GameConstants.player_height);
-			   g.fillRect((rods[i].x - 5), (rods[i].team.players[rods[i].start + j].position.y), GameConstants.player_width, GameConstants.player_height);
+		   for(int i = 0; i < 4; i++) {
+			   Rods temp_rod = teams[k].rods[i];
+			   for (int j=0;j<temp_rod.number_of_players;j++)
+			   {
+				   if (k == 0)
+					   g.setColor(Color.red);
+				   else	
+					   g.setColor(Color.black);
+				   int temp_x = temp_rod.team.players[temp_rod.start + j].position.x;
+				   int temp_y = temp_rod.team.players[temp_rod.start + j].position.y;
+				   g.drawRect(temp_x,temp_y,GameConstants.player_width, GameConstants.player_height);
+				   g.fillRect(temp_x,temp_y,GameConstants.player_width, GameConstants.player_height);
+			   }   
 		   }
-	  
 	   }
 		// Draw ball
 		g.setColor(Color.yellow);
 		//player_has_moved = false;
-		g.fillOval(this.b.position.x, this.b.position.y, GameConstants.ballDiameter, GameConstants.ballDiameter);
+		g.fillOval(this.ball.position.x, this.ball.position.y, GameConstants.ballDiameter, GameConstants.ballDiameter);
 	}
 	private void initUI() {
 		setSize(1000,650);
