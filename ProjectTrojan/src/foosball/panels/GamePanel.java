@@ -36,11 +36,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		Coordinates dummy = new Coordinates(31, (GameConstants.screenHeight / 2 + 1));
 		
 		//create Ball
-		Vector ballDirection = new Vector(initialPosition, dummy);
+		Vector ballDirection = new Vector(dummy, initialPosition);
 		ball = new Ball(initialPosition, ballDirection);
 		
 		//timer
-		this.t = new Timer(5, this);
+		this.t = new Timer(1, this);
 		t.start();
 		addKeyListener((KeyListener) this);
 		setFocusable(true);

@@ -20,6 +20,15 @@ public class Vector {
 		this.steps = steps;
 	}	
 	
+	public void negateDeltaX() {
+		delta.x = -delta.x;
+	}
+	
+	public void negateDeltaY() {
+		delta.y = -delta.y;
+		System.out.println("Negating deltaY");
+	}
+	
 	public void updateStartCoord(Coordinates a1) {
 		this.init = a1;
 		delta.x = fin.x - init.x;
