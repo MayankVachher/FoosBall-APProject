@@ -23,6 +23,18 @@ public class Vector {
 		this.steps = steps;
 	}	
 	
+	public void updateStartCoord(Coordinates a1) {
+		this.a1 = a1;
+		diff.x = a1.x - a2.x;
+		diff.y = a1.y - a2.y;
+	}
+	
+	public void updateEndCoord(Coordinates a2) {
+		this.a2 = a2;
+		diff.x = a1.x - a2.x;
+		diff.y = a1.y - a2.y;
+	}
+	
 	public Coordinates nextStep(Coordinates curr) {
 		Coordinates step = new Coordinates();
 		step.x = (int) (curr.x + (double)((diff.x) / (double)(steps)));
