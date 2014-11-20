@@ -5,6 +5,9 @@ import java.awt.Color;
 
 import javax.swing.*;
 
+import com.sun.org.apache.bcel.internal.Constants;
+
+import foosball.math.GameConstants;
 import foosball.panels.*;
 
 @SuppressWarnings("serial")
@@ -16,12 +19,12 @@ public class HomeScreen extends JFrame {
 
 	private void initUI() {
 		this.add(new HomePanel(),BorderLayout.CENTER);
-		this.setTitle("Foosball");
-		this.setVisible(true);
-		this.setSize(1000,650);
-		this.setLocationRelativeTo(null);
-		this.setResizable(false);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setTitle("Foosball");
+		setSize(GameConstants.screenWidth, GameConstants.screenHeight);
+		add(new HomePanel());
+		setLocationRelativeTo(null);
+	    setResizable(false);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
 	public static void main(String[] args) {

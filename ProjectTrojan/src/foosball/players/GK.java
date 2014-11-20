@@ -1,5 +1,5 @@
 package foosball.players;
 
-public class GK {
-
+public class GK extends Player {
+	String role = "gk";
 }

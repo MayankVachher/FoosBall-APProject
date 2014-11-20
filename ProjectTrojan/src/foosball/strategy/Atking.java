@@ -1,5 +1,8 @@
 package foosball.strategy;
 
-public interface Atking {
+import foosball.environment.Ball;
 
+public interface Atking {
+	public void pass_forward(Ball b);
+	public void shoot(Ball b);
 }
