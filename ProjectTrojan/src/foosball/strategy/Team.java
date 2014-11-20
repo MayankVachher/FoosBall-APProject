@@ -8,48 +8,57 @@ import foosball.players.Player;
 
 public class Team {
 	Player[] players;
-	GK goalie;
 	
-	int n_attackers;
-	int n_defenders;
-	int n_midfielders;
+	int n_atk;
+	int n_def;
+	int n_mid;
 
-	public Team(int n_attackers, int n_defenders, int n_midfielders) throws Exception {
+	public Team(int n_attackers, int n_midfielders, int n_defenders) throws Exception {
 		int i = 0;
-		for (; i < n_attackers; i++) {
-			players[i] = new Atk();
+		n_atk = n_attackers;
+		n_def = n_defenders;
+		n_mid = n_midfielders;
+		
+		for (; i < n_atk; i++)
+			players[i] = new Atk(); //create Attackers
+		
+		for (; i < (n_atk+n_mid); i++)
+			players[i] = new Mid(); //create Mid-fielders
+		
+		for (; i < (n_atk+n_mid+n_def); i++)
+			players[i] = new Def(); //create Defenders
+		
+		players[i] = new GK(); //create Goal Keeper
+		
+		try {
+			if (i != 12) throw new Exception("Number of players less than 11.");
 		}
-		for (; i < n_midfielders; i++) {
-			players[i] = new Mid();
+		catch(Exception e) {
+			System.exit(0);
 		}
-		for (; i < n_defenders; i++) {
-			players[i] = new Def();
-		}
-		players[i] = new GK();
-		if (i != 12) throw new Exception("Number of players less than 11.");
 	}
 	
-	public Atk getAttacker(int index) {
+	public Atk getAttacker(int pos) {
 		int i = 0;
-		i += index;
-		if (index < n_attackers) 
+		i += pos;
+		if (pos < n_atk) 
 			return (Atk) players[i];
 		return null;
 	}
-
-	public Def getDefender(int index) {
-		int i = n_attackers + n_midfielders;
-		i += index;
-		if (index < n_defenders) 
-			return (Def) players[i];
+	
+	public Mid getMidfielder(int pos) {
+		int i = n_atk;
+		i += pos;
+		if (pos < n_mid) 
+			return (Mid) players[i];
 		return null;
 	}
 
-	public Mid getMidfielder(int index) {
-		int i = n_attackers;
-		i += index;
-		if (index < n_midfielders) 
-			return (Mid) players[i];
+	public Def getDefender(int pos) {
+		int i = n_atk + n_mid;
+		i += pos;
+		if (pos < n_def) 
+			return (Def) players[i];
 		return null;
 	}
 
