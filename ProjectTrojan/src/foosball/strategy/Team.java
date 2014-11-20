@@ -14,7 +14,7 @@ public class Team {
 	int n_def;
 	int n_mid;
 
-	public Team(int n_attackers, int n_midfielders, int n_defenders) throws Exception {
+	public Team(int n_attackers, int n_midfielders, int n_defenders) {
 		int i = 0;
 		n_atk = n_attackers;
 		n_def = n_defenders;
