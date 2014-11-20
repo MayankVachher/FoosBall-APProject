@@ -8,7 +8,7 @@ import foosball.players.Mid;
 import foosball.players.Player;
 
 public class Team {
-	public Player[] players;
+	public Player[] players = new Player[11];
 	
 	int n_atk;
 	int n_def;
@@ -19,8 +19,6 @@ public class Team {
 		n_atk = n_attackers;
 		n_def = n_defenders;
 		n_mid = n_midfielders;
-		
-		players = new Player[11];
 
 		for (; i < n_atk; i++) {
 			Coordinates initial = new Coordinates();
