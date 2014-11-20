@@ -21,10 +21,10 @@ public class HomeScreen extends JFrame {
 		this.add(new HomePanel(),BorderLayout.CENTER);
 		setTitle("Foosball");
 		setSize(GameConstants.screenWidth, GameConstants.screenHeight);
-		add(new HomePanel());
 		setLocationRelativeTo(null);
 	    setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setVisible(true);
 	}
 
 	public static void main(String[] args) {

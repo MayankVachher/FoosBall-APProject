@@ -46,7 +46,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		t.start();
 		addKeyListener((KeyListener) this);
 		setFocusable(true);
- 		
 		teams[0] = new Team(2, 5, 3);
 		teams[1] = new Team(2, 5, 3);
 
@@ -58,7 +57,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		rods[5] = new Rods(600, teams[0], 8, 3);
 		rods[6] = new Rods(700, teams[1], 1, 2);
 		rods[7] = new Rods(800, teams[1], 0, 1);
-		
+		initUI();
 		initializePlayerPositions();
 	}
 	public void initializePlayerPositions() {
@@ -79,6 +78,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void nextFrame() {
 		this.b.step();
 		this.repaint();
+	}
+	public static void main(String[] args) {
+		GamePanel gp = new GamePanel();
 	}
 	public void paintComponent(Graphics g){
 		frameCount = 1;

@@ -38,7 +38,7 @@ public class Team {
 		players[i] = new GK(initial, this); //create Goal Keeper
 		
 		try {
-			if (i != 12) throw new Exception("Number of players less than 11.");
+			if (i != 10) throw new Exception("Number of players less than 11.");
 		}
 		catch(Exception e) {
 			System.exit(0);
