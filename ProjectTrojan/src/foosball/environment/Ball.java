@@ -7,7 +7,7 @@ import foosball.strategy.Team;
 public class Ball {
 	Team lastHitBy;
 	Vector direction;
-	Coordinates position;
+	public Coordinates position;
 	
 	public Ball(Coordinates startPosition, Vector initialDirection) {
 		this.direction = initialDirection;
