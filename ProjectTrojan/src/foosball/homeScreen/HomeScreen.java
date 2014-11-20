@@ -2,6 +2,9 @@ package foosball.homeScreen;
 
 import javax.swing.*;
 
+import com.sun.org.apache.bcel.internal.Constants;
+
+import foosball.math.GameConstants;
 import foosball.panels.*;
 
 @SuppressWarnings("serial")
@@ -13,7 +16,7 @@ public class HomeScreen extends JFrame {
 
 	private void initUI() {
 		setTitle("Foosball");
-		setSize(1000,650);
+		setSize(GameConstants.screenWidth, GameConstants.screenHeight);
 		add(new HomePanel());
 		setLocationRelativeTo(null);
 	    setResizable(false);
