@@ -2,10 +2,9 @@ package foosball.panels;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import foosball.math.GameConstants;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,6 +13,20 @@ import java.awt.event.*;
 
 public class HomePanel extends JPanel implements ActionListener {
 
+	AboutPanel about=new AboutPanel();
+	HTPPanel htp=new HTPPanel();
+	TossPanel toss=new TossPanel();
+	TossResultPanel tossResult=new TossResultPanel();
+	String[] choices = { "6-2-2","6-3-1", "5-2-3","5-3-2","5-4-1","4-2-4","4-3-3","4-4-2","4-5-1","3-3-4","3-4-3","3-5-2","3-6-1"};
+	final JComboBox<String> cb = new JComboBox<String>(choices);
+	TeamCompPanel teamComp=new TeamCompPanel(cb);
+	
+	String tossValue;
+	String[] chosenPos=new String[3];
+	int midF,def,attacker;
+	
+	
+	
 	private static final long serialVersionUID = 1L;
 	private JButton playButton, HTPButton, aboutButton;
 	private JPanel headerPanel, buttonPanelContainer, buttonPanel, mainPanel, frame;
@@ -68,21 +81,72 @@ public class HomePanel extends JPanel implements ActionListener {
 		playButton.addActionListener(this);
 		HTPButton.addActionListener(this);
 		aboutButton.addActionListener(this);
+		toss.heads.addActionListener(this);
+	 	toss.tails.addActionListener(this);
+	 	tossResult.selectTeam.addActionListener(this);
+	 	teamComp.OK.addActionListener(this);
 
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == playButton) {
-				frame.removeAll();
-				frame.add(new GamePanel());
-				frame.revalidate();
-				frame.repaint();
+			buttonPanelContainer.remove(1);
+			buttonPanelContainer.add(toss.tossPanel, 1);
+			toss.tossPanel.setVisible(true);
+			validate();
+			this.repaint();
+			/*	
+			*/
 		}
-		else if(e.getSource() == HTPButton) {
-			System.exit(0);
+		if (e.getSource() == toss.heads || e.getSource() == toss.tails)
+		{
+			int rand=(int)(Math.random()*2);
+			this.tossValue=tossResult.calcTossResult(rand);
+			buttonPanelContainer.remove(1);
+			buttonPanelContainer.add(tossResult.tossResultPanel, 1);
+			JLabel tossLabel = new JLabel(tossValue);
+	 	    tossResult.tossResultPanel.add(tossLabel,1);
+			tossResult.tossResultPanel.setVisible(true);
+			validate();
+			this.repaint();
+		
 		}
-		else if(e.getSource() == aboutButton) {
-			System.exit(0);
+		if(e.getSource() == tossResult.selectTeam)
+		{
+			
+			mainPanel.remove(1);
+			mainPanel.add(teamComp.teamCompPanel,1);
+			teamComp.teamCompPanel.setVisible(true);
+			validate();
+			this.repaint();
+			
+		}
+		if(e.getSource() == teamComp.OK) {
+			frame.removeAll();
+			frame.add(new GamePanel());
+			frame.revalidate();
+			frame.repaint();
+			String posSelection = (String)cb.getSelectedItem();
+			chosenPos = posSelection.split("-");
+			midF=Integer.parseInt(chosenPos[0]);
+			def=Integer.parseInt(chosenPos[1]);
+			attacker=Integer.parseInt(chosenPos[2]);
+			
+		}		
+		if(e.getSource() == HTPButton) {
+			mainPanel.remove(1);
+			mainPanel.add(htp.HtpPanel, 1);
+			htp.HtpPanel.setVisible(true);
+			validate();
+			this.repaint();
+		}
+		if(e.getSource() == aboutButton) {
+
+			mainPanel.remove(1);
+			mainPanel.add(about.aboutPanel, 1);
+			about.aboutPanel.setVisible(true);
+			validate();
+			this.repaint();
 		}
 	}
 }
