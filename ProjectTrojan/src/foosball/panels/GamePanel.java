@@ -44,11 +44,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		this.t = new Timer(10, this);
 		t.start();
 		addKeyListener((KeyListener) this);
-		setFocusable(true);
+		this.setFocusable(true);
 		
 		//create teams
 		teams[0] = new Team(2, 5, 3, false);
-		teams[1] = new Team(2, 5, 3, true);
+		teams[1] = new Team(2, 4, 4, true);
 
 		ball.updateLastHit(teams[0]);
 		initUI();
@@ -101,6 +101,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		this.nextFrame();
+		this.requestFocusInWindow(true);
 	}
 	@Override
 	public void keyPressed(KeyEvent arg0) {
