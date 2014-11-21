@@ -28,6 +28,7 @@ import foosball.math.Physics;
 import foosball.math.Scoring;
 import foosball.math.Vector;
 import foosball.players.Player;
+import foosball.strategy.CpuAI;
 import foosball.strategy.Team;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
@@ -35,7 +36,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public Team[] teams = new Team[2];
 	int score_left;
 	int score_right;
-	Timer t;
+	Timer t1, t2;
 	Image background;
 	int frameCount = 0;
 	private static final long serialVersionUID = 1L;
@@ -53,15 +54,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	    jlabel.setFont(new Font("Verdana",1,20));
 	    this.add(jlabel);
 		//timer
-		this.t = new Timer(10, this);
-		t.start();
+		this.t1 = new Timer(10, this);
+		t1.start();
 		addKeyListener((KeyListener) this);
 		this.setFocusable(true);
 		
+
 		//create teams
 		teams[0] = new Team(2, 5, 3, false);
 		teams[1] = new Team(2, 4, 4, true);
 
+		CpuAI ca = new CpuAI(teams[1], ball);
+		this.t2 = new Timer(100, ca);
+		t2.start();
+		
 		ball.updateLastHit(teams[0]);
 		this.setLayout(new GridLayout(1,1));
 		

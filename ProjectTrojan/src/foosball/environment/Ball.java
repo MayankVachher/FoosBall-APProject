@@ -43,11 +43,11 @@ public class Ball {
 		if (left) {
 			this.direction.speed_x = -1;
 			this.direction.speed_y = 0;
-			this.sc.scoreLeft();
+			this.sc.scoreRight();
 		} else {
 			this.direction.speed_x = 1;
 			this.direction.speed_y = 0;
-			this.sc.scoreRight();
+			this.sc.scoreLeft();
 		}
 	}
 	
