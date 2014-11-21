@@ -37,14 +37,14 @@ public class Vector {
 		delta.y = fin.y - init.y;
 		if (Math.abs(delta.x) < Math.abs(delta.y)) {
 			this.steps = Math.abs(delta.x);
-			if (delta.y / this.steps > 5) {
-				delta.y = 5 * this.steps;
+			if (delta.y / this.steps > 3) {
+				delta.y = 3 * this.steps;
 			}
 		}
 		else {
 			this.steps = Math.abs(delta.y);
-			if (delta.x / this.steps > 5) {
-				delta.x = 5 * this.steps;
+			if (delta.x / this.steps > 3) {
+				delta.x = 3 * this.steps;
 			}
 		}
 	}
