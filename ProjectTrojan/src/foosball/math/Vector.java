@@ -10,9 +10,12 @@ public class Vector {
 		this.init = a1;
 		this.fin = a2;
 		delta = new Coordinates(fin.x - init.x, fin.y - init.y);
-		this.steps = delta.x;
+		if (delta.x < delta.y)
+			this.steps = delta.x;
+		else
+			this.steps = delta.y;
 	}
-	
+
 	public Vector(Coordinates a1, Coordinates a2, int steps) {
 		this.init = a1;
 		this.fin = a2;

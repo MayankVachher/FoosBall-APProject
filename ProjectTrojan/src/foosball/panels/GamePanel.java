@@ -55,12 +55,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public synchronized void nextFrame() {
-		System.out.println("Pos: "+this.ball.position.x+", "+this.ball.position.y);
+		//System.out.println("Pos: "+this.ball.position.x+", "+this.ball.position.y);
 		//this.ball.direction.printDel();
 		this.ball.step();
-		//Player collisionWith = Physics.checkPlayerCollisions(teams,ball);
-		//if(collisionWith != null)
-		//	Physics.updateBallDirection(collisionWith,ball);
+		Player collisionWith = Physics.checkPlayerCollisions(teams,ball);
+		if(collisionWith != null)
+			Physics.updateBallDirection(collisionWith,ball);
 		this.repaint();
 	}
 

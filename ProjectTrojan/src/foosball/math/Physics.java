@@ -27,7 +27,7 @@ public class Physics {
 	}
 	
 	public static Player checkPlayerCollisions(Team[] teams, Ball ball) {
-		for(int k = 0; k < 2; k++) {
+		for(int k = 0; k < 1; k++) {
 			for (int i = 0; i < 11; i++) {
 				int ball_curr_x = ball.position.x;
 				int ball_curr_y = ball.position.y;
@@ -49,7 +49,6 @@ public class Physics {
 	}
 
 	public static void updateBallDirection(Player collisionWith, Ball ball) {
-		
 		int x = ball.position.x;
 		int y = ball.position.y;
 		int r = GameConstants.ballDiameter/2;
@@ -75,6 +74,7 @@ public class Physics {
 			}
 		}
 		else { //atk
+			System.out.println("Attack!\n");
 			if((x - r) > p_x) {
 				collisionWith.midHit(ball, true);
 			}
