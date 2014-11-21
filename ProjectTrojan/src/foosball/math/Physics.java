@@ -11,8 +11,9 @@ public class Physics {
 		int pos_x = ball.position.x;
 		int pos_y = ball.position.y;
 		int edgeBottom = GameConstants.screenHeight - GameConstants.ballDiameter - 30;
-		int edgeTop = 35;
+		int edgeTop = 0;
 		int edgeLeft = 0;
+		int goalStart = (GameConstants.screenHeight - GameConstants.goal_height)/2;
 		int edgeRight = GameConstants.screenWidth - GameConstants.ballDiameter;
 		
 		if (pos_y >= edgeBottom || pos_y < edgeTop) {
@@ -20,7 +21,12 @@ public class Physics {
 			return true;
 		}
 		if (pos_x <= edgeLeft || pos_x >= edgeRight) {
+			if(pos_y >= goalStart && pos_y <= goalStart+GameConstants.goal_height) {
+				System.out.println("Goal!!!!");
+			}
+			else {
 			ball.direction.negateDeltaX();
+			}
 			return true;
 		}
 		return false;

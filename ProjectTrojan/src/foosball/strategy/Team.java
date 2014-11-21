@@ -7,6 +7,7 @@ import foosball.players.Def;
 import foosball.players.GK;
 import foosball.players.Mid;
 import foosball.players.Player;
+import foosball.environment.Goal;
 import foosball.environment.Rods;
 
 public class Team {
@@ -16,6 +17,7 @@ public class Team {
 	int n_def;
 	int n_mid;
 	public boolean pos; // 0 for keeper on left, 1 for keeper on right
+	public Goal goal;
 
 	public Team(int n_attackers, int n_midfielders, int n_defenders, boolean pos) {
 		int i = 0;
@@ -23,7 +25,16 @@ public class Team {
 		this.n_def = n_defenders;
 		this.n_mid = n_midfielders;
 		this.pos = pos;
-		
+		int goal_x, goal_y;
+		if(pos) {
+			goal_x = (GameConstants.screenWidth - 3*GameConstants.goal_width);
+			goal_y = (GameConstants.screenHeight - GameConstants.goal_height)/2;
+		}
+		else {
+			goal_x = 0;
+			goal_y = (GameConstants.screenHeight - GameConstants.goal_height)/2;;
+		}
+		goal = new Goal(new Coordinates(goal_x,goal_y),this);
 		this.createRods(n_atk, n_mid, n_def, pos);
 		Coordinates initial = new Coordinates((GameConstants.screenWidth/2),(GameConstants.screenHeight/2));
 

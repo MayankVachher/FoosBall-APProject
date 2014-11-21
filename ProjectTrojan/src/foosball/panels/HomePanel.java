@@ -73,7 +73,7 @@ public class HomePanel extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == playButton) {
-				frame.remove(mainPanel);
+				frame.removeAll();
 				frame.add(new GamePanel());
 				frame.revalidate();
 				frame.repaint();

@@ -7,4 +7,6 @@ public abstract class GameConstants {
 	public static int player_width = 17;
 	public static int ballDiameter = 14;
 	public static int step_player = 7;
+	public static int goal_height = 100;
+	public static int goal_width = 4;
 }

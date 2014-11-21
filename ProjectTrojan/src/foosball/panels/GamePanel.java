@@ -2,6 +2,7 @@ package foosball.panels;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,7 +52,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		teams[1] = new Team(2, 4, 4, true);
 
 		ball.updateLastHit(teams[0]);
-		initUI();
+		this.setLayout(new GridLayout(1,1));
 	}
 
 	public synchronized void nextFrame() {
@@ -79,6 +80,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.fillOval(this.ball.position.x, this.ball.position.y, GameConstants.ballDiameter, GameConstants.ballDiameter);
 		for (int k = 0; k < 2; k++)
 		{
+			//create rods and players
 			for(int i = 0; i < 4; i++) {
 				Rods temp_rod = teams[k].rods[i];
 				for (int j=0;j<temp_rod.number_of_players;j++)
@@ -93,11 +95,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 					g.fillRect(temp_x,temp_y,GameConstants.player_width, GameConstants.player_height);
 				}   
 			}
+			g.setColor(Color.PINK);
+			int temp_x = teams[k].goal.position.x;
+			int temp_y = teams[k].goal.position.y;
+			g.drawRect(temp_x,temp_y,GameConstants.goal_width, GameConstants.goal_height);
+			g.fillRect(temp_x,temp_y,GameConstants.goal_width, GameConstants.goal_height);
 		}
 	}
-	private void initUI() {
-		setSize(1000,650);
-	}
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		this.nextFrame();
