@@ -4,8 +4,8 @@ public class Vector {
 	Coordinates init;
 	Coordinates fin;
 	Coordinates delta;
-	int speed_x;
-	int speed_y;
+	public int speed_x;
+	public int speed_y;
 	int steps;
 	
 	public Vector(Coordinates a1, Coordinates a2) {

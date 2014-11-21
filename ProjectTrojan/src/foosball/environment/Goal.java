@@ -11,4 +11,8 @@ public class Goal {
 		this.position = pos;
 		this.team = team;
 	}
+
+	public static void goalScored(Ball b, boolean left) {
+		b.resetBallPosition(left);
+	}
 }

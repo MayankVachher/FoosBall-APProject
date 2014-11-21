@@ -2,6 +2,7 @@ package foosball.players;
 
 import foosball.environment.Ball;
 import foosball.math.Coordinates;
+import foosball.math.ErrorMargin;
 import foosball.math.GameConstants;
 import foosball.strategy.Atking;
 import foosball.strategy.Defing;
@@ -36,7 +37,11 @@ public class Player implements Atking, Defing {
 				b.direction.negateDeltaX();
 	
 			if (!negateX) {
-				Coordinates a2 = new Coordinates(GameConstants.screenWidth, GameConstants.screenHeight / 2);
+				int y = GameConstants.screenHeight / 2;
+				Coordinates error_c = new Coordinates(GameConstants.screenWidth, y);
+				ErrorMargin em = new ErrorMargin(0, 30);
+				error_c = em.getErrorCoord(error_c);
+				Coordinates a2 = new Coordinates(error_c.x, error_c.y);
 				b.direction.updateEndCoord(a2);
 				b.direction.updateStartCoord(b.position);
 				b.direction.printDel();
@@ -47,7 +52,11 @@ public class Player implements Atking, Defing {
 				b.direction.negateDeltaX();
 	
 			if (!negateX) {
-				Coordinates a2 = new Coordinates(0, GameConstants.screenHeight / 2);
+				int y = GameConstants.screenHeight / 2;
+				Coordinates error_c = new Coordinates(0, y);
+				ErrorMargin em = new ErrorMargin(0, 30);
+				error_c = em.getErrorCoord(error_c);
+				Coordinates a2 = new Coordinates(error_c.x, error_c.y);
 				b.direction.updateEndCoord(a2);
 				b.direction.updateStartCoord(b.position);
 				b.direction.printDel();

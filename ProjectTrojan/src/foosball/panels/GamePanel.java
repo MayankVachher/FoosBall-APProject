@@ -1,6 +1,7 @@
 package foosball.panels;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -14,7 +15,9 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
 import foosball.environment.Ball;
@@ -22,6 +25,7 @@ import foosball.environment.Rods;
 import foosball.math.Coordinates;
 import foosball.math.GameConstants;
 import foosball.math.Physics;
+import foosball.math.Scoring;
 import foosball.math.Vector;
 import foosball.players.Player;
 import foosball.strategy.Team;
@@ -29,6 +33,8 @@ import foosball.strategy.Team;
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Ball ball;
 	public Team[] teams = new Team[2];
+	int score_left;
+	int score_right;
 	Timer t;
 	Image background;
 	int frameCount = 0;
@@ -40,8 +46,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 		//create Ball
 		Vector ballDirection = new Vector(dummy, initialPosition);
-		ball = new Ball(initialPosition, ballDirection);
-		
+		JLabel jlabel = new JLabel("0 - 0", SwingConstants.CENTER);
+		Scoring sc = new Scoring(jlabel);
+		ball = new Ball(initialPosition, ballDirection, sc);
+
+	    jlabel.setFont(new Font("Verdana",1,20));
+	    this.add(jlabel);
 		//timer
 		this.t = new Timer(10, this);
 		t.start();
@@ -74,16 +84,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void paintComponent(Graphics g){
-		frameCount = 1;
 		super.paintComponent(g);
-		//if (frameCount == 30) { this.t.setDelay((int)(Constants.speed)); frameCount = 0; }
 		g.drawImage(background, 0, 0, 1000, 650, this);
-	   // g.fillRect(5, 84, 770, 450);
-	   // g.setColor(Color.green);
-	   // g.fillRect(5, 5, 900, 500);
-	    
+
 		// Draw ball
-		g.setColor(Color.yellow);
+		g.setColor(Color.YELLOW);
 		//player_has_moved = false;
 		g.fillOval(this.ball.position.x, this.ball.position.y, GameConstants.ballDiameter, GameConstants.ballDiameter);
 		for (int k = 0; k < 2; k++)

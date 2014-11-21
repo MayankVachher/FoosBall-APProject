@@ -1,7 +1,9 @@
 package foosball.environment;
 
 import foosball.math.Coordinates;
+import foosball.math.GameConstants;
 import foosball.math.Physics;
+import foosball.math.Scoring;
 import foosball.math.Vector;
 import foosball.strategy.Team;
 
@@ -9,10 +11,12 @@ public class Ball {
 	Team lastHitBy;
 	public Vector direction;
 	public Coordinates position;
+	private Scoring sc;
 	
-	public Ball(Coordinates startPosition, Vector initialDirection) {
+	public Ball(Coordinates startPosition, Vector initialDirection, Scoring sc) {
 		this.direction = initialDirection;
 		this.position = startPosition;
+		this.sc = sc;
 	}
 
 	public void step() {
@@ -31,4 +35,20 @@ public class Ball {
 	public boolean getTeamPos() {
 		return lastHitBy.pos;
 	}
+
+	public void resetBallPosition(boolean left) {
+		this.position.y = GameConstants.screenHeight / 2;
+		this.position.x = GameConstants.screenWidth / 2;
+
+		if (left) {
+			this.direction.speed_x = -1;
+			this.direction.speed_y = 0;
+			this.sc.scoreLeft();
+		} else {
+			this.direction.speed_x = 1;
+			this.direction.speed_y = 0;
+			this.sc.scoreRight();
+		}
+	}
+	
 }

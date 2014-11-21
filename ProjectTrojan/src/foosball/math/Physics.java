@@ -1,6 +1,7 @@
 package foosball.math;
 
 import foosball.environment.Ball;
+import foosball.environment.Goal;
 import foosball.players.Player;
 import foosball.strategy.Team;
 
@@ -23,6 +24,11 @@ public class Physics {
 		if (pos_x <= edgeLeft || pos_x >= edgeRight) {
 			if(pos_y >= goalStart && pos_y <= goalStart+GameConstants.goal_height) {
 				System.out.println("Goal!!!!");
+				if (pos_x <= edgeLeft) {
+					Goal.goalScored(ball, true);
+				} else {
+					Goal.goalScored(ball, false);
+				}
 			}
 			else {
 			ball.direction.negateDeltaX();
