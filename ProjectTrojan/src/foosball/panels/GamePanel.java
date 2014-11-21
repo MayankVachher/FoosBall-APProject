@@ -20,6 +20,7 @@ import foosball.environment.Ball;
 import foosball.environment.Rods;
 import foosball.math.Coordinates;
 import foosball.math.GameConstants;
+import foosball.math.Physics;
 import foosball.math.Vector;
 import foosball.players.Player;
 import foosball.strategy.Team;
@@ -33,14 +34,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public GamePanel() {
 		
 		Coordinates initialPosition = new Coordinates(30, (GameConstants.screenHeight / 2));
-		Coordinates dummy = new Coordinates(31, (GameConstants.screenHeight / 2 + 1));
+		Coordinates dummy = new Coordinates(28, (GameConstants.screenHeight / 2 + 1));
 		
 		//create Ball
 		Vector ballDirection = new Vector(dummy, initialPosition);
 		ball = new Ball(initialPosition, ballDirection);
 		
 		//timer
-		this.t = new Timer(5, this);
+		this.t = new Timer(10, this);
 		t.start();
 		addKeyListener((KeyListener) this);
 		setFocusable(true);
@@ -49,11 +50,17 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		teams[0] = new Team(2, 5, 3, false);
 		teams[1] = new Team(2, 5, 3, true);
 
+		ball.updateLastHit(teams[0]);
 		initUI();
 	}
 
-	public void nextFrame() {
+	public synchronized void nextFrame() {
+		System.out.println("Pos: "+this.ball.position.x+", "+this.ball.position.y);
+		//this.ball.direction.printDel();
 		this.ball.step();
+		//Player collisionWith = Physics.checkPlayerCollisions(teams,ball);
+		//if(collisionWith != null)
+		//	Physics.updateBallDirection(collisionWith,ball);
 		this.repaint();
 	}
 

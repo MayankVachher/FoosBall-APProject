@@ -46,4 +46,11 @@ public class Vector {
 		Coordinates step = new Coordinates(temp_x,temp_y);
 		return step;
 	}
+	
+	public void zeroDeltaY() {
+		delta.y = 0;
+	}
+	public void printDel() {
+		System.out.println("Del: "+delta.x+", "+delta.y);
+	}
 }

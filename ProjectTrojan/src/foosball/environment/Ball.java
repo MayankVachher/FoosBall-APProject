@@ -17,7 +17,7 @@ public class Ball {
 
 	public void step() {
 		position = direction.nextStep(position);
-		Physics.checkEdgeCollision(this);
+		System.out.println(Physics.checkEdgeCollision(this));
 	}
 	
 	public void updateDirection(Vector direction) {
@@ -26,5 +26,9 @@ public class Ball {
 	
 	public void updateLastHit(Team t) {
 		this.lastHitBy = t;
+	}
+	
+	public boolean getTeamPos() {
+		return lastHitBy.pos;
 	}
 }

@@ -15,25 +15,35 @@ public class Player implements Atking, Defing {
 		this.team = team;
 	}
 	@Override
-	public void reflect(Ball b) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void pass_forward(Ball b) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void shoot(Ball b) {
-		// TODO Auto-generated method stub
-		
+	public void reflect(Ball b, boolean mid) {
+		if(mid) {
+			b.direction.negateDeltaX();
+			b.position = b.direction.nextStep(b.position);
+		}
+		else {
+			b.direction.negateDeltaY();
+			b.position = b.direction.nextStep(b.position);
+		}
 	}
 	
 	public void updateCoordinate(int x, int y) {
 		this.position = new Coordinates(x,y);
+	}
+	
+	public Team getTeam() {
+		return team;
+	}
+	@Override
+	public void midHit(Ball b, boolean negateX) {
+		if(negateX)
+			b.direction.negateDeltaX();
+		b.direction.zeroDeltaY();
+		b.position = b.direction.nextStep(b.position);
+	}
+	@Override
+	public void hitTowards(Ball b, Coordinates towards) {
+		b.direction.updateStartCoord(b.position);
+		b.direction.updateEndCoord(towards);
 	}
 
 }

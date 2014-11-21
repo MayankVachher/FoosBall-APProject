@@ -15,7 +15,7 @@ public class Team {
 	int n_atk;
 	int n_def;
 	int n_mid;
-	boolean pos; // 0 for keeper on left, 1 for keeper on right
+	public boolean pos; // 0 for keeper on left, 1 for keeper on right
 
 	public Team(int n_attackers, int n_midfielders, int n_defenders, boolean pos) {
 		int i = 0;
