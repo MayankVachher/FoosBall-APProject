@@ -30,6 +30,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Ball ball;
 	public Team[] teams = new Team[2];
 	Timer t;
+	Image background;
 	int frameCount = 0;
 	private static final long serialVersionUID = 1L;
 	public GamePanel() {
@@ -53,6 +54,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		ball.updateLastHit(teams[0]);
 		this.setLayout(new GridLayout(1,1));
+		
+		try {
+			background = ImageIO.read(new File("img/background.jpg"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public synchronized void nextFrame() {
@@ -69,13 +77,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		frameCount = 1;
 		super.paintComponent(g);
 		//if (frameCount == 30) { this.t.setDelay((int)(Constants.speed)); frameCount = 0; }
-		// g.drawImage(this.background, 0, 0, 1000, 600, this);
-	    // g.fillRect(5, 84, 770, 450);
-	    // g.setColor(Color.green);
-	    // g.fillRect(5, 5, 900, 500);
+		g.drawImage(background, 0, 0, 1000, 650, this);
+	   // g.fillRect(5, 84, 770, 450);
+	   // g.setColor(Color.green);
+	   // g.fillRect(5, 5, 900, 500);
 	    
 		// Draw ball
-		g.setColor(Color.darkGray);
+		g.setColor(Color.yellow);
 		//player_has_moved = false;
 		g.fillOval(this.ball.position.x, this.ball.position.y, GameConstants.ballDiameter, GameConstants.ballDiameter);
 		for (int k = 0; k < 2; k++)
@@ -86,9 +94,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 				for (int j=0;j<temp_rod.number_of_players;j++)
 				{
 					if (k == 0)
-						g.setColor(Color.red);
+						g.setColor(new Color(49,49,49));
 					else	
-						g.setColor(Color.black);
+						g.setColor(new Color(181,43,56));
 					int temp_x = temp_rod.team.players[temp_rod.start + j].position.x;
 					int temp_y = temp_rod.team.players[temp_rod.start + j].position.y;
 					g.drawRect(temp_x,temp_y,GameConstants.player_width, GameConstants.player_height);
