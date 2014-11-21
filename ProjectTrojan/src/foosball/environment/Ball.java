@@ -17,7 +17,7 @@ public class Ball {
 
 	public void step() {
 		position = direction.nextStep(position);
-		System.out.println(Physics.checkEdgeCollision(this));
+		Physics.checkEdgeCollision(this);
 	}
 	
 	public void updateDirection(Vector direction) {

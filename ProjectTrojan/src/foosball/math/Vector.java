@@ -35,14 +35,14 @@ public class Vector {
 		this.init = a1;
 		delta.x = fin.x - init.x;
 		delta.y = fin.y - init.y;
-		if (delta.x < delta.y) {
-			this.steps = delta.x;
+		if (Math.abs(delta.x) < Math.abs(delta.y)) {
+			this.steps = Math.abs(delta.x);
 			if (delta.y / this.steps > 5) {
 				delta.y = 5 * this.steps;
 			}
 		}
 		else {
-			this.steps = delta.y;
+			this.steps = Math.abs(delta.y);
 			if (delta.x / this.steps > 5) {
 				delta.x = 5 * this.steps;
 			}
