@@ -2,6 +2,7 @@ package foosball.players;
 
 import foosball.environment.Ball;
 import foosball.math.Coordinates;
+import foosball.math.GameConstants;
 import foosball.strategy.Atking;
 import foosball.strategy.Defing;
 import foosball.strategy.Team;
@@ -37,8 +38,14 @@ public class Player implements Atking, Defing {
 	public void midHit(Ball b, boolean negateX) {
 		if(negateX)
 			b.direction.negateDeltaX();
-		b.direction.zeroDeltaY();
-		b.position = b.direction.nextStep(b.position);
+
+		if (!negateX) {
+			b.position.x += 20;
+			Coordinates a2 = new Coordinates(GameConstants.screenWidth, GameConstants.screenHeight / 2);
+			b.direction.updateEndCoord(a2);
+			b.direction.updateStartCoord(b.position);
+			b.direction.printDel();
+		}
 	}
 	@Override
 	public void hitTowards(Ball b, Coordinates towards) {

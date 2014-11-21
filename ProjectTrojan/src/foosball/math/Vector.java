@@ -35,6 +35,18 @@ public class Vector {
 		this.init = a1;
 		delta.x = fin.x - init.x;
 		delta.y = fin.y - init.y;
+		if (delta.x < delta.y) {
+			this.steps = delta.x;
+			if (delta.y / this.steps > 5) {
+				delta.y = 5 * this.steps;
+			}
+		}
+		else {
+			this.steps = delta.y;
+			if (delta.x / this.steps > 5) {
+				delta.x = 5 * this.steps;
+			}
+		}
 	}
 	
 	public void updateEndCoord(Coordinates a2) {
@@ -48,10 +60,6 @@ public class Vector {
 		int temp_y = (int) (curr.y + (double)((delta.y) / (double)(steps)));
 		Coordinates step = new Coordinates(temp_x,temp_y);
 		return step;
-	}
-	
-	public void zeroDeltaY() {
-		delta.y = 0;
 	}
 	public void printDel() {
 		System.out.println("Del: "+delta.x+", "+delta.y);

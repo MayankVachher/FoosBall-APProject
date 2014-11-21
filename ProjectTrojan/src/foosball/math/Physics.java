@@ -75,10 +75,13 @@ public class Physics {
 		}
 		else { //atk
 			System.out.println("Attack!\n");
-			if((x - r) > p_x) {
+			if(x > p_x) {
+				// from right side
 				collisionWith.midHit(ball, true);
 			}
 			else {
+				// from left side
+				System.out.println("Attack2: \n\n\n");	
 				collisionWith.midHit(ball, false);
 			}
 		}
