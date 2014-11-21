@@ -73,27 +73,27 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	    // g.setColor(Color.green);
 	    // g.fillRect(5, 5, 900, 500);
 	    
-	   for (int k = 0; k < 2; k++)
-	   {
-		   for(int i = 0; i < 4; i++) {
-			   Rods temp_rod = teams[k].rods[i];
-			   for (int j=0;j<temp_rod.number_of_players;j++)
-			   {
-				   if (k == 0)
-					   g.setColor(Color.red);
-				   else	
-					   g.setColor(Color.black);
-				   int temp_x = temp_rod.team.players[temp_rod.start + j].position.x;
-				   int temp_y = temp_rod.team.players[temp_rod.start + j].position.y;
-				   g.drawRect(temp_x,temp_y,GameConstants.player_width, GameConstants.player_height);
-				   g.fillRect(temp_x,temp_y,GameConstants.player_width, GameConstants.player_height);
-			   }   
-		   }
-	   }
 		// Draw ball
 		g.setColor(Color.darkGray);
 		//player_has_moved = false;
 		g.fillOval(this.ball.position.x, this.ball.position.y, GameConstants.ballDiameter, GameConstants.ballDiameter);
+		for (int k = 0; k < 2; k++)
+		{
+			for(int i = 0; i < 4; i++) {
+				Rods temp_rod = teams[k].rods[i];
+				for (int j=0;j<temp_rod.number_of_players;j++)
+				{
+					if (k == 0)
+						g.setColor(Color.red);
+					else	
+						g.setColor(Color.black);
+					int temp_x = temp_rod.team.players[temp_rod.start + j].position.x;
+					int temp_y = temp_rod.team.players[temp_rod.start + j].position.y;
+					g.drawRect(temp_x,temp_y,GameConstants.player_width, GameConstants.player_height);
+					g.fillRect(temp_x,temp_y,GameConstants.player_width, GameConstants.player_height);
+				}   
+			}
+		}
 	}
 	private void initUI() {
 		setSize(1000,650);
