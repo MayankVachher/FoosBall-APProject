@@ -10,10 +10,20 @@ public class Vector {
 		this.init = a1;
 		this.fin = a2;
 		delta = new Coordinates(fin.x - init.x, fin.y - init.y);
-		if (delta.x < delta.y)
-			this.steps = delta.x;
-		else
-			this.steps = delta.y;
+		if (delta.x == 0) delta.x = 1;
+		if (delta.y == 0) delta.y = 1;
+		if (Math.abs(delta.x) < Math.abs(delta.y)) {
+			this.steps = Math.abs(delta.x);
+			if (delta.y / this.steps > 3) {
+				delta.y = 3 * this.steps;
+			}
+		}
+		else {
+			this.steps = Math.abs(delta.y);
+			if (delta.x / this.steps > 3) {
+				delta.x = 3 * this.steps;
+			}
+		}
 	}
 
 	public Vector(Coordinates a1, Coordinates a2, int steps) {
@@ -35,6 +45,8 @@ public class Vector {
 		this.init = a1;
 		delta.x = fin.x - init.x;
 		delta.y = fin.y - init.y;
+		if (delta.x == 0) delta.x = 1;
+		if (delta.y == 0) delta.y = 1;
 		if (Math.abs(delta.x) < Math.abs(delta.y)) {
 			this.steps = Math.abs(delta.x);
 			if (delta.y / this.steps > 3) {
@@ -53,6 +65,20 @@ public class Vector {
 		this.fin = a2;
 		delta.x = fin.x - init.x;
 		delta.y = fin.y - init.y;
+		if (delta.x == 0) delta.x = 1;
+		if (delta.y == 0) delta.y = 1;
+		if (Math.abs(delta.x) < Math.abs(delta.y)) {
+			this.steps = Math.abs(delta.x);
+			if (delta.y / this.steps > 3) {
+				delta.y = 3 * this.steps;
+			}
+		}
+		else {
+			this.steps = Math.abs(delta.y);
+			if (delta.x / this.steps > 3) {
+				delta.x = 3 * this.steps;
+			}
+		}
 	}
 	
 	public Coordinates nextStep(Coordinates curr) {
