@@ -17,14 +17,8 @@ public class Player implements Atking, Defing {
 	}
 	@Override
 	public void reflect(Ball b, boolean mid) {
-		if(mid) {
-			b.direction.negateDeltaX();
-			b.position = b.direction.nextStep(b.position);
-		}
-		else {
-			b.direction.negateDeltaY();
-			b.position = b.direction.nextStep(b.position);
-		}
+		b.direction.negateDeltaX();
+		b.position = b.direction.nextStep(b.position);
 	}
 	
 	public void updateCoordinate(int x, int y) {
@@ -35,16 +29,29 @@ public class Player implements Atking, Defing {
 		return team;
 	}
 	@Override
-	public void midHit(Ball b, boolean negateX) {
-		if(negateX)
-			b.direction.negateDeltaX();
-
-		if (!negateX) {
-			b.position.x += 20;
-			Coordinates a2 = new Coordinates(GameConstants.screenWidth, GameConstants.screenHeight / 2);
-			b.direction.updateEndCoord(a2);
-			b.direction.updateStartCoord(b.position);
-			b.direction.printDel();
+	public void midHit(Ball b, boolean negateX, boolean teamPos) {
+		if (teamPos == false) {
+			b.position.x += 10;
+			if(negateX)
+				b.direction.negateDeltaX();
+	
+			if (!negateX) {
+				Coordinates a2 = new Coordinates(GameConstants.screenWidth, GameConstants.screenHeight / 2);
+				b.direction.updateEndCoord(a2);
+				b.direction.updateStartCoord(b.position);
+				b.direction.printDel();
+			}
+		} else {
+			b.position.x -= 10;
+			if(negateX)
+				b.direction.negateDeltaX();
+	
+			if (!negateX) {
+				Coordinates a2 = new Coordinates(0, GameConstants.screenHeight / 2);
+				b.direction.updateEndCoord(a2);
+				b.direction.updateStartCoord(b.position);
+				b.direction.printDel();
+			}
 		}
 	}
 	@Override

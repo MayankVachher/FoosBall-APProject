@@ -142,6 +142,31 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 				}
 			}
 		}
+		
+		if (arg0.getKeyCode() == KeyEvent.VK_NUMPAD8) {
+			ArrayList<Integer> al = new ArrayList<Integer>();
+			for (int i = 0; i < teams[1].players.length; i++) {
+				if (teams[1].players[i].position.y <= GameConstants.step_player+10) {
+					al.add(teams[1].players[i].position.x);
+				}
+			} for (int i = 0; i < teams[1].players.length; i++) {
+				if (!al.contains(teams[1].players[i].position.x)) {
+					teams[1].players[i].position.y -= GameConstants.step_player;
+				}
+			}
+		}
+		if (arg0.getKeyCode() == KeyEvent.VK_NUMPAD5) {
+			ArrayList<Integer> al = new ArrayList<Integer>();
+			for (int i = 0; i < teams[1].players.length; i++) {
+				if (teams[1].players[i].position.y >= GameConstants.screenHeight + GameConstants.step_player) {
+					al.add(teams[1].players[i].position.x);
+				}
+			} for (int i = 0; i < teams[1].players.length; i++) {
+				if (!al.contains(teams[1].players[i].position.x)) {
+					teams[1].players[i].position.y += GameConstants.step_player;
+				}
+			}
+		}
 	}
 	@Override
 	public void keyReleased(KeyEvent arg0) {

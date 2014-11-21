@@ -33,7 +33,7 @@ public class Physics {
 	}
 	
 	public static Player checkPlayerCollisions(Team[] teams, Ball ball) {
-		for(int k = 0; k < 1; k++) {
+		for(int k = 0; k < 2; k++) {
 			for (int i = 0; i < 11; i++) {
 				int ball_curr_x = ball.position.x;
 				int ball_curr_y = ball.position.y;
@@ -63,32 +63,63 @@ public class Physics {
 		int p_x = collisionWith.position.x;
 		int p_y = collisionWith.position.y;
 		
-		if(collisionWith.getTeam().pos != ball.getTeamPos()) { //def
-			if((x - r) > p_x) {
-				if(y < p_y+(h/3)) {
-					collisionWith.reflect(ball, false);
-				}
-				else if(y < p_y+(2*h/3)) {
-					collisionWith.reflect(ball, true);
+		boolean def = false;
+		
+		if (collisionWith.getTeam().pos != ball.getTeamPos()) {
+			def = true;
+			System.out.println("Defence mode!");
+		}
+		
+		if(def) { //def
+			if (collisionWith.getTeam().pos == false) {
+				if((x - r) > p_x) {
+					if(y < p_y+(h/3)) {
+						collisionWith.reflect(ball, false);
+					}
+					else if(y < p_y+(2*h/3)) {
+						collisionWith.reflect(ball, true);
+					}
+					else {
+						collisionWith.reflect(ball, false);
+					}
 				}
 				else {
-					collisionWith.reflect(ball, false);
+					collisionWith.midHit(ball, false, false);
 				}
-			}
-			else {
-				collisionWith.midHit(ball, false);
+			} else {
+				if((x + r) < p_x + w) {
+					collisionWith.midHit(ball, false, true);
+				}
+				else {
+					if(y < p_y+(h/3)) {
+						collisionWith.reflect(ball, false);
+					}
+					else if(y < p_y+(2*h/3)) {
+						collisionWith.reflect(ball, true);
+					}
+					else {
+						collisionWith.reflect(ball, false);
+					}
+				}
 			}
 		}
 		else { //atk
-			System.out.println("Attack!\n");
-			if(x > p_x) {
-				// from right side
-				collisionWith.midHit(ball, true);
-			}
-			else {
-				// from left side
-				System.out.println("Attack2: \n\n\n");	
-				collisionWith.midHit(ball, false);
+			if (collisionWith.getTeam().pos == false) {
+				if(x > p_x + w) {
+					// from right side
+					collisionWith.midHit(ball, true, false);
+				}
+				else {
+						collisionWith.midHit(ball, false, false);
+				}
+			} else {
+				if(x > p_x + w) {
+					// from right side
+					collisionWith.midHit(ball, false, true);
+				}
+				else {
+						collisionWith.midHit(ball, true, true);
+				}
 			}
 		}
 		ball.updateLastHit(collisionWith.getTeam());
