@@ -20,8 +20,9 @@ public class HomePanel extends JPanel implements ActionListener {
 	String[] choices = { "6-2-2","6-3-1", "5-2-3","5-3-2","5-4-1","4-2-4","4-3-3","4-4-2","4-5-1","3-3-4","3-4-3","3-5-2","3-6-1"};
 	final JComboBox<String> cb = new JComboBox<String>(choices);
 	TeamCompPanel teamComp=new TeamCompPanel(cb);
+	DifficultyPanel level=new DifficultyPanel();
 	
-	String tossValue;
+	String tossValue,difficultyLvl;
 	String[] chosenPos=new String[3];
 	int midF,def,attacker;
 	
@@ -85,7 +86,9 @@ public class HomePanel extends JPanel implements ActionListener {
 	 	toss.tails.addActionListener(this);
 	 	tossResult.selectTeam.addActionListener(this);
 	 	teamComp.OK.addActionListener(this);
-
+	 	level.easyButton.addActionListener(this);
+	 	level.mediumButton.addActionListener(this);
+	 	level.hardButton.addActionListener(this);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -114,25 +117,50 @@ public class HomePanel extends JPanel implements ActionListener {
 		if(e.getSource() == tossResult.selectTeam)
 		{
 			
-			mainPanel.remove(1);
-			mainPanel.add(teamComp.teamCompPanel,1);
+			buttonPanelContainer.remove(1);
+			buttonPanelContainer.add(teamComp.teamCompPanel,1);
 			teamComp.teamCompPanel.setVisible(true);
 			validate();
 			this.repaint();
 			
 		}
 		if(e.getSource() == teamComp.OK) {
-			frame.removeAll();
-			frame.add(new GamePanel());
-			frame.revalidate();
-			frame.repaint();
+		
 			String posSelection = (String)cb.getSelectedItem();
 			chosenPos = posSelection.split("-");
 			midF=Integer.parseInt(chosenPos[0]);
 			def=Integer.parseInt(chosenPos[1]);
 			attacker=Integer.parseInt(chosenPos[2]);
-			
-		}		
+			buttonPanelContainer.remove(1);
+			buttonPanelContainer.add(level.difficultyPanel,1);
+			validate();
+			this.repaint();
+		}
+		if (e.getSource()==level.easyButton)
+		{
+			difficultyLvl="Easy";
+			frame.removeAll();
+			frame.add(new GamePanel());
+			frame.revalidate();
+			frame.repaint();
+
+		}
+		if (e.getSource()==level.mediumButton)
+		{
+			difficultyLvl="Medium";
+			frame.removeAll();
+			frame.add(new GamePanel());
+			frame.revalidate();
+			frame.repaint();
+		}
+		if (e.getSource()==level.hardButton)
+		{
+			difficultyLvl="Hard";
+			frame.removeAll();
+			frame.add(new GamePanel());
+			frame.revalidate();
+			frame.repaint();
+		}
 		if(e.getSource() == HTPButton) {
 			mainPanel.remove(1);
 			mainPanel.add(htp.HtpPanel, 1);
