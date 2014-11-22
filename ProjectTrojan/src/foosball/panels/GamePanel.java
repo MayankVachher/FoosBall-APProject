@@ -57,7 +57,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		addKeyListener((KeyListener) this);
 		this.setFocusable(true);
 		
-		if (tossValue == "You win!") {
+		if (tossValue.equals("You win!")) {
 			this.ball.resetAndMove(true);
 		} else {
 			this.ball.resetAndMove(false);
@@ -68,9 +68,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		teams[1] = new Team(2, 4, 4, true);
 
 		CpuAI ca = new CpuAI(teams[1], ball);
-		if (difficultyLvl == "Easy") {
+		if (difficultyLvl.equals("Easy")) {
 			this.t2 = new Timer(200, ca);
-		} else if (difficultyLvl == "Medium") {
+		} else if (difficultyLvl.equals("Medium")) {
 			this.t2 = new Timer(100, ca);
 		} else {
 			this.t2 = new Timer(10, ca);
