@@ -19,7 +19,7 @@ public class TeamCompPanel extends JPanel{
 		  teamCompPanel.add(new JLabel(""));
 	 	   teamCompPanel.add(new JLabel(""));
 	 	   teamCompPanel.add(new JLabel(""));
-	 	   JLabel label = new JLabel("Def-MidF-Att",SwingConstants.CENTER);
+	 	   JLabel label = new JLabel("Def-Mid-Att",SwingConstants.CENTER);
 	 	   label.setVisible(true);
 	 	   teamCompPanel.add(label);
 	 	   teamCompPanel.add(new JLabel("")); 

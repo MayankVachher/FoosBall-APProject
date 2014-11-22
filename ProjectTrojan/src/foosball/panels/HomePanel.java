@@ -24,7 +24,7 @@ public class HomePanel extends JPanel implements ActionListener {
 	
 	String tossValue,difficultyLvl;
 	String[] chosenPos=new String[3];
-	int midF,def,attacker;
+	int mid,def,att;
 	
 	
 	
@@ -89,6 +89,8 @@ public class HomePanel extends JPanel implements ActionListener {
 	 	level.easyButton.addActionListener(this);
 	 	level.mediumButton.addActionListener(this);
 	 	level.hardButton.addActionListener(this);
+	 	htp.backButton.addActionListener(this);
+	 	about.backButton.addActionListener(this);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -127,9 +129,9 @@ public class HomePanel extends JPanel implements ActionListener {
 		if(e.getSource() == teamComp.OK) {
 			String posSelection = (String)cb.getSelectedItem();
 			chosenPos = posSelection.split("-");
-			midF=Integer.parseInt(chosenPos[0]);
+			mid=Integer.parseInt(chosenPos[0]);
 			def=Integer.parseInt(chosenPos[1]);
-			attacker=Integer.parseInt(chosenPos[2]);
+			att=Integer.parseInt(chosenPos[2]);
 			buttonPanelContainer.remove(1);
 			buttonPanelContainer.add(level.difficultyPanel,1);
 			validate();
@@ -139,7 +141,7 @@ public class HomePanel extends JPanel implements ActionListener {
 		{
 			difficultyLvl="Easy";
 			frame.removeAll();
-			frame.add(new GamePanel(this.tossValue, this.midF, this.def, this.attacker, difficultyLvl));
+			frame.add(new GamePanel(this.tossValue, this.mid, this.def, this.att, difficultyLvl));
 			frame.revalidate();
 			frame.repaint();
 
@@ -148,7 +150,7 @@ public class HomePanel extends JPanel implements ActionListener {
 		{
 			difficultyLvl="Medium";
 			frame.removeAll();
-			frame.add(new GamePanel(this.tossValue, this.midF, this.def, this.attacker, difficultyLvl));
+			frame.add(new GamePanel(this.tossValue, this.mid, this.def, this.att, difficultyLvl));
 			frame.revalidate();
 			frame.repaint();
 		}
@@ -156,23 +158,40 @@ public class HomePanel extends JPanel implements ActionListener {
 		{
 			difficultyLvl="Hard";
 			frame.removeAll();
-			frame.add(new GamePanel(this.tossValue, this.midF, this.def, this.attacker, difficultyLvl));
+			frame.add(new GamePanel(this.tossValue, this.mid, this.def, this.att, difficultyLvl));
 			frame.revalidate();
 			frame.repaint();
 		}
 			
 		if(e.getSource() == HTPButton) {
 			mainPanel.remove(1);
-			mainPanel.add(htp.HtpPanel, 1);
-			htp.HtpPanel.setVisible(true);
+			mainPanel.add(htp, 1);
+			htp.setVisible(true);
 			validate();
 			this.repaint();
 		}
 		if(e.getSource() == aboutButton) {
 
 			mainPanel.remove(1);
-			mainPanel.add(about.aboutPanel, 1);
-			about.aboutPanel.setVisible(true);
+			mainPanel.add(about, 1);
+			about.setVisible(true);
+			validate();
+			this.repaint();
+		}
+		//back buttons
+		if (e.getSource()==htp.backButton)
+		{
+			mainPanel.remove(1);
+			mainPanel.add(this.buttonPanelContainer, 1);
+			htp.setVisible(true);
+			validate();
+			this.repaint();
+		}
+		if (e.getSource()==about.backButton)
+		{
+			mainPanel.remove(1);
+			mainPanel.add(this.buttonPanelContainer, 1);
+			htp.setVisible(true);
 			validate();
 			this.repaint();
 		}
