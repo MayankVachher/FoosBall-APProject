@@ -99,8 +99,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			this.removeAll();
 			gameEnd = new GameEnd(this.ball.gameFinish());
 			this.add(gameEnd);
-//			this.revalidate();
-	//		this.repaint();
+			this.requestFocusInWindow(false);
+			this.revalidate();
+			this.repaint();
 		}
 		else {
 			this.ball.step();
