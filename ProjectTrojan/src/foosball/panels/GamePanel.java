@@ -69,8 +69,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		CpuAI ca = new CpuAI(teams[1], ball);
 		if (difficultyLvl == "Easy") {
-			this.t2 = new Timer(1000, ca);
-		} if (difficultyLvl == "Medium") {
+			this.t2 = new Timer(200, ca);
+		} else if (difficultyLvl == "Medium") {
 			this.t2 = new Timer(100, ca);
 		} else {
 			this.t2 = new Timer(10, ca);
