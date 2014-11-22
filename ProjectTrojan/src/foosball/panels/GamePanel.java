@@ -148,7 +148,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 				}
 			} for (int i = 0; i < teams[0].players.length; i++) {
 				if (!al.contains(teams[0].players[i].position.x)) {
-					teams[0].players[i].position.y -= GameConstants.step_player;
+					if(teams[0].players[0].position.y>=100){
+						teams[0].players[i].position.y -= GameConstants.step_player;
+						//teams[0].players[0].position.y--;
+					}
+					else if(i!=0)
+						teams[0].players[i].position.y -= GameConstants.step_player;
 				}
 			}
 		}
@@ -160,7 +165,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 				}
 			} for (int i = 0; i < teams[0].players.length; i++) {
 				if (!al.contains(teams[0].players[i].position.x)) {
-					teams[0].players[i].position.y += GameConstants.step_player;
+					if(teams[0].players[0].position.y<=525){
+						teams[0].players[i].position.y += GameConstants.step_player;
+						//teams[0].players[0].position.y--;
+					}
+					else if(i!=0)
+						teams[0].players[i].position.y += GameConstants.step_player;
 				}
 			}
 		}
