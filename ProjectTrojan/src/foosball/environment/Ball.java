@@ -1,5 +1,7 @@
 package foosball.environment;
 
+import java.util.Observable;
+
 import foosball.math.Coordinates;
 import foosball.math.GameConstants;
 import foosball.math.Physics;
@@ -7,7 +9,7 @@ import foosball.math.Scoring;
 import foosball.math.Vector;
 import foosball.strategy.Team;
 
-public class Ball {
+public class Ball extends Observable{
 	Team lastHitBy;
 	public Vector direction;
 	public Coordinates position;
@@ -26,10 +28,14 @@ public class Ball {
 	
 	public void updateDirection(Vector direction) {
 		this.direction = direction;
+		setChanged();
+		notifyObservers();
 	}
 	
 	public void updateLastHit(Team t) {
 		this.lastHitBy = t;
+		setChanged();
+		notifyObservers(direction.speed_x+" "+direction.speed_y);
 	}
 	
 	public boolean getTeamPos() {
@@ -69,5 +75,4 @@ public class Ball {
 			return 2;
 		return 0;
 	}
-	
 }
