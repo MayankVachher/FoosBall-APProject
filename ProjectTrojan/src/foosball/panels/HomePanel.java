@@ -19,8 +19,8 @@ public class HomePanel extends JPanel implements ActionListener {
 	TossResultPanel tossResult=new TossResultPanel();
 	String[] choices = { "6-2-2","6-3-1", "5-2-3","5-3-2","5-4-1","4-2-4","4-3-3","4-4-2","4-5-1","3-3-4","3-4-3","3-5-2","3-6-1"};
 	final JComboBox<String> cb = new JComboBox<String>(choices);
-	TeamCompPanel teamComp=new TeamCompPanel(cb);
-	DifficultyPanel level=new DifficultyPanel();
+	TeamCompPanel teamComp = new TeamCompPanel(cb);
+	DifficultyPanel level = new DifficultyPanel();
 	
 	String tossValue,difficultyLvl;
 	String[] chosenPos=new String[3];
@@ -129,8 +129,8 @@ public class HomePanel extends JPanel implements ActionListener {
 		if(e.getSource() == teamComp.OK) {
 			String posSelection = (String)cb.getSelectedItem();
 			chosenPos = posSelection.split("-");
-			mid=Integer.parseInt(chosenPos[0]);
-			def=Integer.parseInt(chosenPos[1]);
+			def=Integer.parseInt(chosenPos[0]);
+			mid=Integer.parseInt(chosenPos[1]);
 			att=Integer.parseInt(chosenPos[2]);
 			buttonPanelContainer.remove(1);
 			buttonPanelContainer.add(level.difficultyPanel,1);
@@ -141,6 +141,7 @@ public class HomePanel extends JPanel implements ActionListener {
 		{
 			difficultyLvl="Easy";
 			frame.removeAll();
+			//frame.add(new GameEnd(1));
 			frame.add(new GamePanel(this.tossValue, this.mid, this.def, this.att, difficultyLvl));
 			frame.revalidate();
 			frame.repaint();

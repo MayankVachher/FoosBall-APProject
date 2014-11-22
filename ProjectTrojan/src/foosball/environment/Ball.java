@@ -62,5 +62,12 @@ public class Ball {
 			this.sc.scoreLeft();
 		}
 	}
+	public int gameFinish() {
+		if(sc.left_score >= 5)
+			return 1;
+		if(sc.right_score >= 1)
+			return 2;
+		return 0;
+	}
 	
 }

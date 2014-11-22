@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -34,12 +33,11 @@ import foosball.strategy.Team;
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Ball ball;
 	public Team[] teams = new Team[2];
-	int score_left;
-	int score_right;
 	Timer t1, t2;
 	Image background;
 	int frameCount = 0;
 	private static final long serialVersionUID = 1L;
+	GameEnd gameEnd;
 	public GamePanel(String tossValue, int mid, int def, int att, String difficultyLvl) {
 		
 		Coordinates initialPosition = new Coordinates(30, (GameConstants.screenHeight / 2));
@@ -71,7 +69,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		CpuAI ca = new CpuAI(teams[1], ball);
 		if (difficultyLvl == "Easy") {
-			this.t2 = new Timer(700, ca);
+			this.t2 = new Timer(1000, ca);
 		} if (difficultyLvl == "Medium") {
 			this.t2 = new Timer(100, ca);
 		} else {
@@ -93,11 +91,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public synchronized void nextFrame() {
 		//System.out.println("Pos: "+this.ball.position.x+", "+this.ball.position.y);
 		//this.ball.direction.printDel();
-		this.ball.step();
-		Player collisionWith = Physics.checkPlayerCollisions(teams,ball);
-		if(collisionWith != null)
-			Physics.updateBallDirection(collisionWith,ball);
-		this.repaint();
+		if(this.ball.gameFinish()!=0) {
+			this.removeAll();
+			gameEnd = new GameEnd(this.ball.gameFinish());
+			this.add(gameEnd);
+//			this.revalidate();
+	//		this.repaint();
+		}
+		else {
+			this.ball.step();
+			Player collisionWith = Physics.checkPlayerCollisions(teams,ball);
+			if(collisionWith != null)
+				Physics.updateBallDirection(collisionWith,ball);
+			this.repaint();
+		}
 	}
 
 	public void paintComponent(Graphics g){
@@ -177,12 +184,57 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 	@Override
 	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+		if (arg0.getKeyCode() == KeyEvent.VK_UP) {
+			ArrayList<Integer> al = new ArrayList<Integer>();
+			for (int i = 0; i < teams[0].players.length; i++) {
+				if (teams[0].players[i].position.y <= GameConstants.step_player+10) {
+					al.add(teams[0].players[i].position.x);
+				}
+			} for (int i = 0; i < teams[0].players.length; i++) {
+				if (!al.contains(teams[0].players[i].position.x)) {
+					teams[0].players[i].position.y -= GameConstants.step_player;
+				}
+			}
+		}
+		if (arg0.getKeyCode() == KeyEvent.VK_DOWN) {
+			ArrayList<Integer> al = new ArrayList<Integer>();
+			for (int i = 0; i < teams[0].players.length; i++) {
+				if (teams[0].players[i].position.y >= GameConstants.screenHeight - 50 + GameConstants.step_player) {
+					al.add(teams[0].players[i].position.x);
+				}
+			} for (int i = 0; i < teams[0].players.length; i++) {
+				if (!al.contains(teams[0].players[i].position.x)) {
+					teams[0].players[i].position.y += GameConstants.step_player;
+				}
+			}
+		}
 	}
 	@Override
 	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-
+		if (arg0.getKeyCode() == KeyEvent.VK_UP) {
+			ArrayList<Integer> al = new ArrayList<Integer>();
+			for (int i = 0; i < teams[0].players.length; i++) {
+				if (teams[0].players[i].position.y <= GameConstants.step_player+10) {
+					al.add(teams[0].players[i].position.x);
+				}
+			} for (int i = 0; i < teams[0].players.length; i++) {
+				if (!al.contains(teams[0].players[i].position.x)) {
+					teams[0].players[i].position.y -= GameConstants.step_player;
+				}
+			}
+		}
+		if (arg0.getKeyCode() == KeyEvent.VK_DOWN) {
+			ArrayList<Integer> al = new ArrayList<Integer>();
+			for (int i = 0; i < teams[0].players.length; i++) {
+				if (teams[0].players[i].position.y >= GameConstants.screenHeight - 50 + GameConstants.step_player) {
+					al.add(teams[0].players[i].position.x);
+				}
+			} for (int i = 0; i < teams[0].players.length; i++) {
+				if (!al.contains(teams[0].players[i].position.x)) {
+					teams[0].players[i].position.y += GameConstants.step_player;
+				}
+			}
+		}
 	}
 }
 
