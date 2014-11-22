@@ -55,7 +55,12 @@ public class CpuAI implements ActionListener {
 			if (touchingTop.contains(min_player.position.x)) return;
 			for (int i = 0; i < 11; i++) {
 				if (!touchingTop.contains(t.players[i].position.x)) {
-					t.players[i].position.y -= GameConstants.step_player;
+					if(t.players[0].position.y>=100){
+						t.players[i].position.y -= GameConstants.step_player;
+						//teams[0].players[0].position.y--;
+					}
+					else if(i!=0)
+						t.players[i].position.y -= GameConstants.step_player;
 				}
 			}
 		} else {
@@ -63,7 +68,12 @@ public class CpuAI implements ActionListener {
 			
 			for (int i = 0; i < 11; i++) {
 				if (!touchingBot.contains(t.players[i].position.x)) {
-					t.players[i].position.y += GameConstants.step_player;
+					if(t.players[0].position.y<=525){
+						t.players[i].position.y += GameConstants.step_player;
+						//teams[0].players[0].position.y--;
+					}
+					else if(i!=0)
+						t.players[i].position.y += GameConstants.step_player;
 				}
 			}
 		}
