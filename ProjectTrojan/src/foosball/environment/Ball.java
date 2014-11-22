@@ -65,7 +65,7 @@ public class Ball {
 	public int gameFinish() {
 		if(sc.left_score >= 5)
 			return 1;
-		if(sc.right_score >= 1)
+		if(sc.right_score >= 5)
 			return 2;
 		return 0;
 	}

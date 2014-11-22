@@ -64,9 +64,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 
 		//create teams
+		try{
 		teams[0] = new Team(att, mid, def, false);
 		teams[1] = new Team(2, 4, 4, true);
-
+		}
+		catch(Exception e){
+			System.exit(1);
+		}
 		CpuAI ca = new CpuAI(teams[1], ball);
 		if (difficultyLvl.equals("Easy")) {
 			this.t2 = new Timer(200, ca);

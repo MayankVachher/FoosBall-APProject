@@ -11,9 +11,9 @@ public class TossResultPanel extends JPanel{
 	public JButton selectTeam;
 	public TossResultPanel()
 	{
-		tossResultPanel = new JPanel(new GridLayout(1,7));
+		 tossResultPanel = new JPanel(new GridLayout(1,7));
 		
-		selectTeam=new JButton("Select Team");
+		 selectTeam=new JButton("Select Team");
 		
 		 tossResultPanel.add(new JLabel(""));
 	  	 tossResultPanel.add(selectTeam);

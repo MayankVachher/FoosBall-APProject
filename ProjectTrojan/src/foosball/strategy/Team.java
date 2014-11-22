@@ -9,6 +9,7 @@ import foosball.players.Mid;
 import foosball.players.Player;
 import foosball.environment.Goal;
 import foosball.environment.Rods;
+import foosball.exceptions.*;
 
 public class Team {
 	public Player[] players = new Player[11];
@@ -19,8 +20,23 @@ public class Team {
 	public boolean pos; // 0 for keeper on left, 1 for keeper on right
 	public Goal goal;
 
-	public Team(int n_attackers, int n_midfielders, int n_defenders, boolean pos) {
+	public Team(int n_attackers, int n_midfielders, int n_defenders, boolean pos) throws AttackerCountException, MidfielderCountException, DefenderCountException, TeamCountException{
 		int i = 0;
+
+		if (n_attackers + n_midfielders + n_defenders != 10)
+			throw new TeamCountException("Number of players less than 11.");
+	
+		if(n_attackers<1 || n_attackers>4){
+			throw new AttackerCountException("Invalid number of Attackers");
+		}
+		if(n_midfielders<2 || n_midfielders>6){
+			throw new MidfielderCountException("Invalid number of Midfielders");
+		}
+		if(n_defenders<3 || n_defenders>6){
+			throw new DefenderCountException("Invalid number of Defenders");
+		}
+		
+		
 		this.n_atk = n_attackers;
 		this.n_def = n_defenders;
 		this.n_mid = n_midfielders;
@@ -46,12 +62,7 @@ public class Team {
 			players[i] = new Def(initial, this); //create Defenders
 		players[i] = new GK(initial, this); //create Goal Keeper
 		
-		try {
-			if (i != 10) throw new Exception("Number of players less than 11.");
-		}
-		catch(Exception e) {
-			System.exit(0);
-		}
+		
 		
 		this.updatePlayerPositions(pos);
 	}
