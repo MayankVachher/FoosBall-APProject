@@ -125,7 +125,6 @@ public class HomePanel extends JPanel implements ActionListener {
 			
 		}
 		if(e.getSource() == teamComp.OK) {
-		
 			String posSelection = (String)cb.getSelectedItem();
 			chosenPos = posSelection.split("-");
 			midF=Integer.parseInt(chosenPos[0]);
@@ -140,7 +139,7 @@ public class HomePanel extends JPanel implements ActionListener {
 		{
 			difficultyLvl="Easy";
 			frame.removeAll();
-			frame.add(new GamePanel());
+			frame.add(new GamePanel(this.tossValue, this.midF, this.def, this.attacker, difficultyLvl));
 			frame.revalidate();
 			frame.repaint();
 
@@ -149,7 +148,7 @@ public class HomePanel extends JPanel implements ActionListener {
 		{
 			difficultyLvl="Medium";
 			frame.removeAll();
-			frame.add(new GamePanel());
+			frame.add(new GamePanel(this.tossValue, this.midF, this.def, this.attacker, difficultyLvl));
 			frame.revalidate();
 			frame.repaint();
 		}
@@ -157,10 +156,11 @@ public class HomePanel extends JPanel implements ActionListener {
 		{
 			difficultyLvl="Hard";
 			frame.removeAll();
-			frame.add(new GamePanel());
+			frame.add(new GamePanel(this.tossValue, this.midF, this.def, this.attacker, difficultyLvl));
 			frame.revalidate();
 			frame.repaint();
 		}
+			
 		if(e.getSource() == HTPButton) {
 			mainPanel.remove(1);
 			mainPanel.add(htp.HtpPanel, 1);

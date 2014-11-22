@@ -20,12 +20,12 @@ public class CpuAI implements ActionListener {
 	}
 	public void moveCPU() {
 		Player min_player = t.players[0];
-		
+
 		ArrayList<Integer> touchingTop = new ArrayList<Integer>();
 		ArrayList<Integer> touchingBot = new ArrayList<Integer>();
-		
+	
 		for (int i = 0; i < t.players.length; i++) {
-			if (t.players[i].position.y >= GameConstants.screenHeight + GameConstants.step_player) {
+			if (t.players[i].position.y >= GameConstants.screenHeight - 50 + GameConstants.step_player) {
 				touchingBot.add(t.players[i].position.x);
 			} if (t.players[i].position.y <= GameConstants.step_player) {
 				touchingTop.add(t.players[i].position.x);

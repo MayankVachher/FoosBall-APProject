@@ -40,7 +40,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Image background;
 	int frameCount = 0;
 	private static final long serialVersionUID = 1L;
-	public GamePanel() {
+	public GamePanel(String tossValue, int mid, int def, int att, String difficultyLvl) {
 		
 		Coordinates initialPosition = new Coordinates(30, (GameConstants.screenHeight / 2));
 		Coordinates dummy = new Coordinates(28, (GameConstants.screenHeight / 2 + 1));
@@ -59,15 +59,26 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		addKeyListener((KeyListener) this);
 		this.setFocusable(true);
 		
+		if (tossValue == "You win!") {
+			this.ball.resetAndMove(true);
+		} else {
+			this.ball.resetAndMove(false);
+		}
 
 		//create teams
-		teams[0] = new Team(2, 5, 3, false);
+		teams[0] = new Team(att, mid, def, false);
 		teams[1] = new Team(2, 4, 4, true);
 
 		CpuAI ca = new CpuAI(teams[1], ball);
-		this.t2 = new Timer(100, ca);
+		if (difficultyLvl == "Easy") {
+			this.t2 = new Timer(700, ca);
+		} if (difficultyLvl == "Medium") {
+			this.t2 = new Timer(100, ca);
+		} else {
+			this.t2 = new Timer(10, ca);
+		}
 		t2.start();
-		
+
 		ball.updateLastHit(teams[0]);
 		this.setLayout(new GridLayout(1,1));
 		
@@ -144,37 +155,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (arg0.getKeyCode() == KeyEvent.VK_DOWN) {
 			ArrayList<Integer> al = new ArrayList<Integer>();
 			for (int i = 0; i < teams[0].players.length; i++) {
-				if (teams[0].players[i].position.y >= GameConstants.screenHeight + GameConstants.step_player) {
+				if (teams[0].players[i].position.y >= GameConstants.screenHeight - 50 + GameConstants.step_player) {
 					al.add(teams[0].players[i].position.x);
 				}
 			} for (int i = 0; i < teams[0].players.length; i++) {
 				if (!al.contains(teams[0].players[i].position.x)) {
 					teams[0].players[i].position.y += GameConstants.step_player;
-				}
-			}
-		}
-		
-		if (arg0.getKeyCode() == KeyEvent.VK_NUMPAD8) {
-			ArrayList<Integer> al = new ArrayList<Integer>();
-			for (int i = 0; i < teams[1].players.length; i++) {
-				if (teams[1].players[i].position.y <= GameConstants.step_player+10) {
-					al.add(teams[1].players[i].position.x);
-				}
-			} for (int i = 0; i < teams[1].players.length; i++) {
-				if (!al.contains(teams[1].players[i].position.x)) {
-					teams[1].players[i].position.y -= GameConstants.step_player;
-				}
-			}
-		}
-		if (arg0.getKeyCode() == KeyEvent.VK_NUMPAD5) {
-			ArrayList<Integer> al = new ArrayList<Integer>();
-			for (int i = 0; i < teams[1].players.length; i++) {
-				if (teams[1].players[i].position.y >= GameConstants.screenHeight + GameConstants.step_player) {
-					al.add(teams[1].players[i].position.x);
-				}
-			} for (int i = 0; i < teams[1].players.length; i++) {
-				if (!al.contains(teams[1].players[i].position.x)) {
-					teams[1].players[i].position.y += GameConstants.step_player;
 				}
 			}
 		}

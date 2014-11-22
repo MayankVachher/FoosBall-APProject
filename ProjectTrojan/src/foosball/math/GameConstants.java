@@ -9,4 +9,6 @@ public abstract class GameConstants {
 	public static int step_player = 7;
 	public static int goal_height = 100;
 	public static int goal_width = 4;
+	public static int goal_bound_y1 = 300;
+	public static int goal_bound_y2 = 500;
 }

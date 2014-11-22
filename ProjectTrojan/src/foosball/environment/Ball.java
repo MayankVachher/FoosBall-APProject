@@ -36,6 +36,18 @@ public class Ball {
 		return lastHitBy.pos;
 	}
 
+	public void resetAndMove(boolean left) {
+		this.position.y = GameConstants.screenHeight / 2;
+		this.position.x = GameConstants.screenWidth / 2;
+
+		if (left) {
+			this.direction.speed_x = -1;
+			this.direction.speed_y = 0;
+		} else {
+			this.direction.speed_x = 1;
+			this.direction.speed_y = 0;
+		}
+	}
 	public void resetBallPosition(boolean left) {
 		this.position.y = GameConstants.screenHeight / 2;
 		this.position.x = GameConstants.screenWidth / 2;

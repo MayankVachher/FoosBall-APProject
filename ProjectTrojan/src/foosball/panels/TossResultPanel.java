@@ -22,9 +22,9 @@ public class TossResultPanel extends JPanel{
 	public String calcTossResult(int rand)
 	{
 		if (rand==1)
-		return "You win!";
+			return "You win!";
 		else
-		return "You lose!";
+			return "You lose!";
 		
 	}
 }
