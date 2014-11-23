@@ -47,10 +47,10 @@ public class GameEnd extends JPanel implements ActionListener {
 		buttonPanelContainer.add(new JLabel(""));
 		
 		if(team == 1) {
-			image = new ImageIcon("img/header.jpg");
+			image = new ImageIcon("img/team1.jpg");
 		}
 		else {	
-			image = new ImageIcon("img/header.jpg");
+			image = new ImageIcon("img/team2.jpg");
 		}
 		JLabel bgLabel = new JLabel("", image, JLabel.CENTER);
  		headerPanel.add(bgLabel);
